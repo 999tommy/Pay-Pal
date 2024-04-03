@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import LoginForm from './component/LoginForm';
+
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Logo from '/pal.svg'
 
