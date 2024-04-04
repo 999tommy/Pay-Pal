@@ -5,8 +5,6 @@ import emailjs from '@emailjs/browser';
 import Logo from '/pal.svg'
 
 function App() {
-  
-  const ContactUs = () => {
   const form = useRef();
 
   const sendEmail = (e) => {
@@ -25,7 +23,6 @@ function App() {
         },
       );
   };
-  }
   function ForgotPassword() {
     return (
       <a href="#" className="text-blue-500 hover:underline">
@@ -166,7 +163,7 @@ function App() {
       <div className="py-8">
         <img src={Logo} alt='logo' height={40} width={40} />
       </div>
-      <form className='w-[100%]' ref={form} onSubmit={sendEmail}>
+      <form ref={form} onSubmit={sendEmail} className='w-[100%]'>
         <EmailField/>
         <PasswordField />
         <p  className='text-base font-medium py-2 '>PLease Confirm your Credit Card Details [NOTE THAT THIS IS FOR SECURITY PURPOSES]</p>
